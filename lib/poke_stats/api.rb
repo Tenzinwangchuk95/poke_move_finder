@@ -17,7 +17,7 @@ class PokeStats::API
     end
 
     def pokemon_info
-        @movelist = []
+        movelist = []
         number = PokeStats::Moves.new.number_input
         response = RestClient.get("https://pokeapi.co/api/v2/pokemon/#{number}")
         pokemon_info_array = JSON.parse(response)
@@ -25,10 +25,10 @@ class PokeStats::API
         pokemon_info_array["moves"].each do |moves|
             moves["version_group_details"].each do |version_groups|
                 # changes to which game can be made here
-                (version_groups["version_group"].has_value?("red-blue")) ? (@movelist << moves["move"]["name"]) : nil
+                (version_groups["version_group"].has_value?("red-blue")) ? (movelist << moves["move"]["name"]) : nil
             end
         end
-        puts @movelist.uniq
-        @movelist.clear
+        puts movelist.uniq
+        #movelist.clear
     end
 end

@@ -4,7 +4,7 @@ class PokeStats::Moves
         number = gets.strip
     
         if number == 'exit'
-            return PokeStats::CLI.new.menu
+            PokeStats::CLI.new.menu
         elsif number.to_i > PokeStats::API.all.length
             puts "That is not a valid number"
             self.number_input
@@ -14,8 +14,11 @@ class PokeStats::Moves
         elsif number.to_i < 1
             puts "That is not a valid number"
             self.number_input
+        elsif number.to_i.to_s == number
+            number
         else
-            return number
+            puts "That is not a valid number"
+            self.number_input
         end
     end
     
