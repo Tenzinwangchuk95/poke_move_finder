@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require_relative "../lib/poke_stats"
+
+PokeStats::CLI.new.call
+PokeStats::CLI.new.menu
