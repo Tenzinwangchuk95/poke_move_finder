@@ -2,6 +2,7 @@ class PokeStats::CLI
 
     def call
         puts "Welcome to the Pokemon Center!"
+        PokeStats::API.new.dex
     end
 
     def menu
@@ -16,7 +17,7 @@ class PokeStats::CLI
             # when 'move'
             #     move
             when 'number'
-                pokemon
+                display_all_pokemon
             when 'exit'
                 goodbye
             else 
@@ -28,13 +29,11 @@ class PokeStats::CLI
     def goodbye
         puts "Thanks for visting the Pokemon Center!"
         exit!
-
     end
 
-    def pokemon
-        PokeStats::Pokemon.new.sort_by_dex
-        PokeStats::Moves.new.pokemon_movelist
+    def display_all_pokemon
+        PokeStats::Pokemon.all.each {|pokemon| puts "#{pokemon.number}.#{pokemon.name}"}
+        PokeStats::Pokemon.find_moves
     end
-
 
 end
